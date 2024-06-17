@@ -6,6 +6,7 @@ package controllers;
 
 import arquivos.Arquivos;
 import arquivos.GravadorArquivos;
+import arquivos.LeitorArquivoTutor;
 import entities.Tutor;
 import java.io.IOException;
 
@@ -14,18 +15,19 @@ import java.io.IOException;
  * @author Luis
  */
 public class TutorController {
-        public boolean registrar(Tutor u)
-    {
+    
+    private LeitorArquivoTutor leitor;
+
+    public boolean registrar(Tutor u) {
         try {
             GravadorArquivos leitor = new GravadorArquivos(Arquivos.TUTORES);
             leitor.gravar(u.toString());
             leitor.fechar();
             return true;
-        }
-        catch(IOException ex) {
+        } catch (IOException ex) {
             ex.printStackTrace();
             return false;
         }
     }
-    
+
 }

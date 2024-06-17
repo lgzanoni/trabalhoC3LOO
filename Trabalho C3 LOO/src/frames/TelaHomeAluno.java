@@ -4,14 +4,17 @@
  */
 package frames;
 
+import arquivos.LeitorArquivoTutor;
+import entities.Tutor;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
@@ -24,12 +27,14 @@ import javax.swing.SwingConstants;
  * @author Luis
  */
 public class TelaHomeAluno extends javax.swing.JPanel {
+
     private MainFrame mainFrame;
     private JPanel panelCards;
     private JScrollPane scrollPane;
     private JPopupMenu menuPopup;
+    private LeitorArquivoTutor leitor;
 
-    public TelaHomeAluno(MainFrame mainFrame) {
+    public TelaHomeAluno(MainFrame mainFrame) throws IOException {
         this.mainFrame = mainFrame;
         setSize(1080, 900);
         setLayout(new BorderLayout());
@@ -40,6 +45,7 @@ public class TelaHomeAluno extends javax.swing.JPanel {
         topPanel.setLayout(new BorderLayout());
         JLabel labelTitulo = new JLabel("ESTUDAAI", SwingConstants.CENTER);
         labelTitulo.setSize(new Dimension(200, 100));
+        labelTitulo.setFont(new Font("Calibri", Font.BOLD, 36));
         topPanel.add(labelTitulo, BorderLayout.CENTER);
 
         // Ícone de menu e ação
@@ -58,8 +64,8 @@ public class TelaHomeAluno extends javax.swing.JPanel {
         panelCards = new JPanel();
         panelCards.setLayout(new BoxLayout(panelCards, BoxLayout.Y_AXIS));
         scrollPane = new JScrollPane(panelCards,
-            JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-            JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         add(scrollPane, BorderLayout.CENTER);
 
         // Adicionando cards
@@ -76,10 +82,11 @@ public class TelaHomeAluno extends javax.swing.JPanel {
         menuPopup.show(component, x, y);
     }
 
-    private void adicionarCards() {
+    private void adicionarCards() throws IOException {
+        leitor = new LeitorArquivoTutor();
         // Exemplo de adicionar cards
-        for (int i = 0; i < 10; i++) {
-            TutorCard card = new TutorCard("Tutor " + (i + 1), "Matemática", "Contactar");
+        for (Tutor t : leitor.ler()) {
+            TutorCard card = new TutorCard("Tutor " + t.getNome(), "Especializacao: " + t.getEspecialidade(), "Quero ter aula com esse professor!");
             panelCards.add(card);
             panelCards.add(Box.createRigidArea(new Dimension(0, 10))); // Espaço entre cards
         }
