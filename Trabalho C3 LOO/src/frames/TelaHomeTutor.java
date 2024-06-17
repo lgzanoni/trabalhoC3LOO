@@ -4,12 +4,17 @@
  */
 package frames;
 
+import arquivos.LeitorArquivoAluno;
+import arquivos.LeitorArquivoTutor;
+import entities.Aluno;
+import entities.Tutor;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
@@ -29,8 +34,9 @@ public class TelaHomeTutor extends javax.swing.JPanel {
     private JPanel panelCards;
     private JScrollPane scrollPane;
     private JPopupMenu menuPopup;
+    private LeitorArquivoAluno leitor;
     
-    public TelaHomeTutor(MainFrame mainFrame) {
+    public TelaHomeTutor(MainFrame mainFrame) throws IOException {
         this.mainFrame = mainFrame;
         setSize(1080, 900);
         setLayout(new BorderLayout());
@@ -76,10 +82,11 @@ public class TelaHomeTutor extends javax.swing.JPanel {
         menuPopup.show(component, x, y);
     }
     
-    private void adicionarCards() {
-        
-        for (int i = 0; i < 10; i++) {
-            TutorCard card = new TutorCard("Tutor " + (i + 1), "Matemática", "Contactar");
+    private void adicionarCards() throws IOException {
+        leitor = new LeitorArquivoAluno();
+        // Exemplo de adicionar cards
+        for (Aluno a : leitor.ler()) {
+            TutorCard card = new TutorCard("Aluno " + a.getNome(), "Quero ajuda na materia: " + a.getMateriaDesejada(), "Enviar mensagem para aluno!");
             panelCards.add(card);
             panelCards.add(Box.createRigidArea(new Dimension(0, 10))); // Espaço entre cards
         }
