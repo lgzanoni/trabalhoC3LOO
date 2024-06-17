@@ -45,6 +45,6 @@ public abstract class Usuario {
     }
     @Override
     public String toString() {
-        return "Usuario{" + "login=" + login + ", senha=" + senha + ", email=" + email + ", funcao=" + funcao + '}';
+        return login + ";" + senha + ";" + email + ";" + funcao + ';';
     }
 }

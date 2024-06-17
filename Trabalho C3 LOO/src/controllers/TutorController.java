@@ -17,7 +17,7 @@ public class TutorController {
         public boolean registrar(Tutor u)
     {
         try {
-            GravadorArquivos leitor = new GravadorArquivos(Arquivos.TURORES);
+            GravadorArquivos leitor = new GravadorArquivos(Arquivos.TUTORES);
             leitor.gravar(u.toString());
             leitor.fechar();
             return true;

@@ -1,6 +1,7 @@
 package entities;
 
-public class Aluno extends Usuario{
+public class Aluno extends Usuario {
+
     private String nome;
     private String materiaDesejada;
     private String escolaridade;
@@ -11,6 +12,10 @@ public class Aluno extends Usuario{
         this.nome = nome;
         this.materiaDesejada = materiaDesejada;
         this.escolaridade = escolaridade;
+    }
+
+    public Aluno(String login, String senha, String email, String funcao) {
+        super(login, senha, email, funcao);
     }
 
     public String getNome() {
@@ -36,5 +41,9 @@ public class Aluno extends Usuario{
     public void setEscolaridade(String escolaridade) {
         this.escolaridade = escolaridade;
     }
-    
+
+    @Override
+    public String toString() {
+        return login + ";" + senha + ";" + email + ";" + funcao + ";" + nome + ";" + materiaDesejada + ";" + escolaridade;
+    }
 }

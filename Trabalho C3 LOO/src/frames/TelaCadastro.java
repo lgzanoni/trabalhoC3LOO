@@ -1,25 +1,28 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package frames;
 
 import controllers.AlunoController;
 import controllers.TutorController;
+import controllers.UsuarioController;
 import entities.Aluno;
 import entities.Tutor;
-import javax.swing.JComboBox;
 
 /**
  *
  * @author Luis
  */
-public class TelaCadastro extends javax.swing.JFrame {
+public class TelaCadastro extends javax.swing.JPanel {
+
+    private MainFrame mainFrame;
 
     /**
      * Creates new form TelaCadastro
      */
-    public TelaCadastro() {
+    public TelaCadastro(MainFrame mainFrame) {
+        this.mainFrame = mainFrame;
         initComponents();
         populateComboBox();
     }
@@ -60,8 +63,6 @@ public class TelaCadastro extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jPasswordField1 = new javax.swing.JPasswordField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         jLabel1.setText("Usuario");
 
         jLabel2.setText("Senha");
@@ -75,28 +76,25 @@ public class TelaCadastro extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.setText("jTextField1");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
             }
         });
 
-        jTextField3.setText("jTextField3");
-
         jLabel4.setText("Como voce quer se juntar para a familia Estudai?");
 
         jLabel5.setText("Nome");
 
-        jTextField4.setText("jTextField4");
-
         jLabel6.setText("MateriaDesejada");
 
-        jTextField5.setText("jTextField5");
+        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField5ActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Escolaridade");
-
-        jTextField6.setText("jTextField6");
 
         jButton1.setText("Registrar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -105,7 +103,11 @@ public class TelaCadastro extends javax.swing.JFrame {
             }
         });
 
-        jPasswordField1.setText("jPasswordField1");
+        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPasswordField1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -188,27 +190,25 @@ public class TelaCadastro extends javax.swing.JFrame {
                 .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(182, 182, 182)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(354, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(256, Short.MAX_VALUE))
+                .addGap(337, 337, 337))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(108, 108, 108)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(249, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addGap(196, 196, 196))
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
@@ -227,12 +227,16 @@ public class TelaCadastro extends javax.swing.JFrame {
             jLabel7.setVisible(true);
             jTextField6.setVisible(true);
         }
-// TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String usuario = jTextField1.getText();
@@ -242,53 +246,29 @@ public class TelaCadastro extends javax.swing.JFrame {
         String nome = jTextField4.getText();
         String materia = jTextField5.getText();
         String escolaridade = jTextField6.getText();
-        
+
         if (funcao.equals("Aluno")) {
+            UsuarioController usuarioController = new UsuarioController();
             AlunoController alunoController = new AlunoController();
             Aluno aluno = new Aluno(usuario, senha, email, funcao, nome, materia, escolaridade);
+            Aluno alunoUser = new Aluno(usuario, senha, email, funcao);
             alunoController.registrar(aluno);
+            usuarioController.registrar(alunoUser);
         } else if (funcao.equals("Tutor")) {
+            UsuarioController usuarioController = new UsuarioController();
             TutorController tutorController = new TutorController();
             Tutor tutor = new Tutor(usuario, senha, email, funcao, nome, materia, escolaridade);
+            Tutor tutorUser = new Tutor(usuario, senha, email, funcao);
             tutorController.registrar(tutor);
-
+            usuarioController.registrar(tutorUser);
         }// TODO add your handling code here:
+        mainFrame.showCard("Login");
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPasswordField1ActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TelaCadastro().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

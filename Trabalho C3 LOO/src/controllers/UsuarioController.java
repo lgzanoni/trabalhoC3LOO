@@ -4,7 +4,10 @@
  */
 package controllers;
 
+import arquivos.Arquivos;
+import arquivos.GravadorArquivos;
 import arquivos.LeitorArquivoUsuarios;
+import entities.Aluno;
 import entities.Usuario;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -17,22 +20,38 @@ import java.util.Scanner;
  *
  * @author Luis
  */
-public abstract class UsuarioController {
+public class UsuarioController {
 
-    public boolean verificarLogin(String usuario, String senha) {
+    private LeitorArquivoUsuarios leitor;
+
+    public Usuario verificarLogin(String usuario, String senha) throws IOException {
         try {
-            File arquivo = new File("usuarios.txt");
-            Scanner leitor = new Scanner(arquivo);
-            while (leitor.hasNextLine()) {
-                String[] dados = leitor.nextLine().split(",");
-                if (dados[0].equals(usuario) && dados[1].equals(senha)) {
-                    return true;
+            leitor = new LeitorArquivoUsuarios();
+            Usuario uRetorno = null;
+            for (Usuario u : leitor.ler()) {
+                if (usuario.equals(u.getLogin())
+                        && senha.equals(u.getSenha())) {
+                    uRetorno = u;
+                    break;
                 }
             }
-            leitor.close();
+            leitor.fechar();
+            return uRetorno;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        return false;
+        return null;
+    }
+
+    public boolean registrar(Usuario u) {
+        try {
+            GravadorArquivos leitor = new GravadorArquivos(Arquivos.USUARIOS);
+            leitor.gravar(u.toString());
+            leitor.fechar();
+            return true;
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return false;
+        }
     }
 }

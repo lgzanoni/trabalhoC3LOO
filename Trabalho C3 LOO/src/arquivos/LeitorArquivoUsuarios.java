@@ -3,10 +3,11 @@ package arquivos;
 import java.io.FileNotFoundException;
 import java.util.NoSuchElementException;
 import entities.Usuario;
+import java.io.IOException;
 
 public class LeitorArquivoUsuarios extends LeitorArquivo<Usuario>
 {
-    public LeitorArquivoUsuarios() throws FileNotFoundException {
+    public LeitorArquivoUsuarios() throws FileNotFoundException, IOException {
         super();
     }
     

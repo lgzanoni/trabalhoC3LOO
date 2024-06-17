@@ -1,0 +1,6 @@
+teste1;1234;teste@teste.com;Aluno;null;null;null
+nanadez;1234;email@teste.com;Tutor;null;null;null
+;;;Aluno;null;null;null
+;;;Aluno;null;null;null
+;;;Aluno;null;null;null
+;;;Aluno;null;null;null

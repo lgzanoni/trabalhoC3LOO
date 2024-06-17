@@ -1,0 +1,6 @@
+lgzanoni;1234;teste@email.com;Aluno;Luis Gustavo Zanoni;Exatas;Superior Completo
+teste1;1234;teste@teste.com;Aluno;Testaldo Da Silva;Exatas;Fundamental
+;;;Aluno;;;
+;;;Aluno;;;
+;;;Aluno;;;
+;;;Aluno;;;

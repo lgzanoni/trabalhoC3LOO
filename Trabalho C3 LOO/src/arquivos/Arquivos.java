@@ -5,7 +5,7 @@ package arquivos;
  * @author Luis
  */
 public enum Arquivos {
-    TURORES("tutores.txt"),
+    TUTORES("tutores.txt"),
     ALUNOS("alunos.txt"),
     USUARIOS("usuarios.txt");
     
