@@ -6,6 +6,4 @@ teste1;1234;teste@teste.com;Aluno;Nita H. Decker;Programacao;Ensino Medio
 teste1;1234;teste@teste.com;Aluno;John M. Sosa;Programacao;Superior Completo
 teste1;1234;teste@teste.com;Aluno;Matheus Melo Barbosa;Biologicas;Fundamental
 teste1;1234;teste@teste.com;Aluno;Breno Rodrigues Lima;Economia;Ensino Medio Completo;;;Aluno;;Exatas;
-asdasd;1234;asdasas;Aluno;dasdasda;Exatas;teste
-asddas;1234;asdadsads;Aluno;dasdsa7;Exatas;dsaadssa
-sdasdasadasd;1234;vvdssfdfgsd;Aluno;hgjghgjhghj;Exatas;jhgghfjfgjhgf
+

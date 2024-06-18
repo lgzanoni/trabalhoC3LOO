@@ -52,12 +52,13 @@ public class TelaLogin extends javax.swing.JPanel {
         UsuarioController controller = new UsuarioController();
 
         Usuario verificacao = controller.verificarLogin(login, senha);
+        if (verificacao == null) {
+            JOptionPane.showMessageDialog(null, "Usuario inválido", "Ops!", JOptionPane.WARNING_MESSAGE);
+        }
         if (verificacao.getFuncao().equalsIgnoreCase("Aluno")) {
             mainFrame.showCard("TelaAluno");
         } else if (verificacao.getFuncao().equalsIgnoreCase("Tutor")) {
             mainFrame.showCard("TelaTutor");
-        } else {
-            JOptionPane.showMessageDialog(null, "Usuario inválido", "Ops!", JOptionPane.WARNING_MESSAGE);
         }
     }
 

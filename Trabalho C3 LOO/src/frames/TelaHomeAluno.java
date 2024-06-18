@@ -87,17 +87,13 @@ public class TelaHomeAluno extends javax.swing.JPanel {
         sideMenuPanel = new JPanel();
         sideMenuPanel.setLayout(new BorderLayout());
         sideMenuPanel.setPreferredSize(new Dimension(250, getHeight()));
-        sideMenuPanel.setBackground(Color.LIGHT_GRAY);
+        sideMenuPanel.setBackground(Styles.MENU_COLOR);
 
         JButton btnSair = new JButton("Sair");
         btnSair.addActionListener(e -> mainFrame.showCard("Login"));
         JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        bottomPanel.setBackground(Styles.MENU_COLOR);
         bottomPanel.add(btnSair);
-
-        sideMenuPanel.add(bottomPanel, BorderLayout.SOUTH);
-        sideMenuPanel.setVisible(false); // O menu começa oculto
-
-        add(sideMenuPanel, BorderLayout.WEST);
 
         // Configuração dos cards
         panelCards = new JPanel();

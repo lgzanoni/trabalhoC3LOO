@@ -3,14 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Luis/Desktop/trabalhos%20facul/trabalhoC3LOO/Trabalho%20C3%20LOO/src/entities/Aluno.java</file>
             <file>file:/C:/Users/Luis/Desktop/trabalhos%20facul/trabalhoC3LOO/Trabalho%20C3%20LOO/src/frames/TelaLogin.java</file>
             <file>file:/C:/Users/Luis/Desktop/trabalhos%20facul/trabalhoC3LOO/Trabalho%20C3%20LOO/src/frames/TelaHomeTutor.java</file>
-            <file>file:/C:/Users/Luis/Desktop/trabalhos%20facul/trabalhoC3LOO/Trabalho%20C3%20LOO/src/arquivos/LeitorArquivoAluno.java</file>
-            <file>file:/C:/Users/Luis/Desktop/trabalhos%20facul/trabalhoC3LOO/Trabalho%20C3%20LOO/src/entities/Tutor.java</file>
+            <file>file:/C:/Users/Luis/Desktop/trabalhos%20facul/trabalhoC3LOO/Trabalho%20C3%20LOO/src/frames/TutorCard.java</file>
             <file>file:/C:/Users/Luis/Desktop/trabalhos%20facul/trabalhoC3LOO/Trabalho%20C3%20LOO/src/frames/MainFrame.java</file>
             <file>file:/C:/Users/Luis/Desktop/trabalhos%20facul/trabalhoC3LOO/Trabalho%20C3%20LOO/src/arquivos/LeitorArquivo.java</file>
-            <file>file:/C:/Users/Luis/Desktop/trabalhos%20facul/trabalhoC3LOO/Trabalho%20C3%20LOO/src/arquivos/LeitorArquivoUsuarios.java</file>
+            <file>file:/C:/Users/Luis/Desktop/trabalhos%20facul/trabalhoC3LOO/Trabalho%20C3%20LOO/src/frames/Styles.java</file>
+            <file>file:/C:/Users/Luis/Desktop/trabalhos%20facul/trabalhoC3LOO/Trabalho%20C3%20LOO/src/arquivos/LeitorArquivoTutor.java</file>
             <file>file:/C:/Users/Luis/Desktop/trabalhos%20facul/trabalhoC3LOO/Trabalho%20C3%20LOO/src/frames/TelaHomeAluno.java</file>
             <file>file:/C:/Users/Luis/Desktop/trabalhos%20facul/trabalhoC3LOO/Trabalho%20C3%20LOO/src/frames/TelaCadastro.java</file>
         </group>
