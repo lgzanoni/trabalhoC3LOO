@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package frames;
 
 import arquivos.LeitorArquivoAluno;
@@ -29,13 +25,13 @@ import javax.swing.SwingConstants;
  * @author Luis
  */
 public class TelaHomeTutor extends javax.swing.JPanel {
-    
+
     private MainFrame mainFrame;
     private JPanel panelCards;
     private JScrollPane scrollPane;
     private JPopupMenu menuPopup;
     private LeitorArquivoAluno leitor;
-    
+
     public TelaHomeTutor(MainFrame mainFrame) throws IOException {
         this.mainFrame = mainFrame;
         setSize(1080, 900);
@@ -46,6 +42,8 @@ public class TelaHomeTutor extends javax.swing.JPanel {
         topPanel.setPreferredSize(new Dimension(1080, 100));
         topPanel.setLayout(new BorderLayout());
         JLabel labelTitulo = new JLabel("ESTUDAAI", SwingConstants.CENTER);
+        labelTitulo.setSize(new Dimension(200, 100));
+        labelTitulo.setFont(new Font("Calibri", Font.BOLD, 36));
         topPanel.add(labelTitulo, BorderLayout.CENTER);
 
         // Ícone de menu e ação
@@ -57,8 +55,8 @@ public class TelaHomeTutor extends javax.swing.JPanel {
             }
         });
         topPanel.add(menuLabel, BorderLayout.WEST);
-        
-        add(topPanel, BorderLayout.WEST);
+
+        add(topPanel, BorderLayout.NORTH);
 
         // Configuração dos cards
         panelCards = new JPanel();
@@ -71,7 +69,7 @@ public class TelaHomeTutor extends javax.swing.JPanel {
         // Adicionando cards
         adicionarCards();
     }
-    
+
     private void mostrarMenu(Component component, int x, int y) {
         if (menuPopup == null) {
             menuPopup = new JPopupMenu();
@@ -81,7 +79,7 @@ public class TelaHomeTutor extends javax.swing.JPanel {
         }
         menuPopup.show(component, x, y);
     }
-    
+
     private void adicionarCards() throws IOException {
         leitor = new LeitorArquivoAluno();
         // Exemplo de adicionar cards
