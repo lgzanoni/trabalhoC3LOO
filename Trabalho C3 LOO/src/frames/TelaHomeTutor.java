@@ -1,22 +1,27 @@
 package frames;
 
 import arquivos.LeitorArquivoAluno;
-import arquivos.LeitorArquivoTutor;
 import entities.Aluno;
-import entities.Tutor;
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.MediaTracker;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.io.IOException;
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
@@ -29,34 +34,65 @@ public class TelaHomeTutor extends javax.swing.JPanel {
     private MainFrame mainFrame;
     private JPanel panelCards;
     private JScrollPane scrollPane;
-    private JPopupMenu menuPopup;
+    private JPanel sideMenuPanel;
     private LeitorArquivoAluno leitor;
+    private boolean isMenuVisible = false;
 
     public TelaHomeTutor(MainFrame mainFrame) throws IOException {
         this.mainFrame = mainFrame;
         setSize(1080, 900);
         setLayout(new BorderLayout());
+        setBackground(Styles.BACKGROUND_COLOR);
 
         // Painel Superior
         JPanel topPanel = new JPanel();
         topPanel.setPreferredSize(new Dimension(1080, 100));
         topPanel.setLayout(new BorderLayout());
+        topPanel.setBackground(Styles.BACKGROUND_COLOR);
+        topPanel.setBorder(BorderFactory.createLineBorder(Styles.PANEL_BORDER_COLOR));
         JLabel labelTitulo = new JLabel("ESTUDAAI", SwingConstants.CENTER);
+        labelTitulo.setForeground(Styles.PANEL_BORDER_COLOR);
         labelTitulo.setSize(new Dimension(200, 100));
         labelTitulo.setFont(new Font("Calibri", Font.BOLD, 36));
         topPanel.add(labelTitulo, BorderLayout.CENTER);
 
-        // Ícone de menu e ação
-        JLabel menuLabel = new JLabel("MENU"); // Defina o caminho do seu ícone de menu
+        String basePath = new File(System.getProperty("user.dir")).getAbsolutePath();
+        String iconPath = basePath + File.separator + "files" + File.separator + "icon.png";
+        ImageIcon menuIcon = new ImageIcon(iconPath);
+        System.out.println("Caminho do ícone do menu: " + iconPath);
+        if (menuIcon.getImageLoadStatus() != MediaTracker.COMPLETE) {
+            System.out.println("Erro ao carregar o ícone: " + iconPath);
+        }
+                // Redimensionar a imagem
+        Image image = menuIcon.getImage(); // transforma o ícone em Image
+        Image newimg = image.getScaledInstance(30, 30,  java.awt.Image.SCALE_SMOOTH); // escala a imagem
+        menuIcon = new ImageIcon(newimg);  // transforma de volta para ImageIcon
+        JLabel menuLabel = new JLabel(menuIcon);
         menuLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                mostrarMenu(e.getComponent(), e.getX(), e.getY());
+                toggleMenu();
             }
         });
         topPanel.add(menuLabel, BorderLayout.WEST);
 
         add(topPanel, BorderLayout.NORTH);
+
+        sideMenuPanel = new JPanel();
+        sideMenuPanel.setLayout(new BorderLayout());
+        sideMenuPanel.setPreferredSize(new Dimension(250, getHeight()));
+        sideMenuPanel.setBackground(Styles.MENU_COLOR);
+
+        JButton btnSair = new JButton("Sair");
+        btnSair.addActionListener(e -> mainFrame.showCard("Login"));
+        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        bottomPanel.setBackground(Styles.MENU_COLOR);
+        bottomPanel.add(btnSair);
+
+        sideMenuPanel.add(bottomPanel, BorderLayout.SOUTH);
+        sideMenuPanel.setVisible(false); // O menu começa oculto
+
+        add(sideMenuPanel, BorderLayout.WEST);
 
         // Configuração dos cards
         panelCards = new JPanel();
@@ -70,25 +106,29 @@ public class TelaHomeTutor extends javax.swing.JPanel {
         adicionarCards();
     }
 
-    private void mostrarMenu(Component component, int x, int y) {
-        if (menuPopup == null) {
-            menuPopup = new JPopupMenu();
-            JMenuItem menuItemSair = new JMenuItem("Sair");
-            menuItemSair.addActionListener(e -> mainFrame.showCard("Login"));
-            menuPopup.add(menuItemSair);
-        }
-        menuPopup.show(component, x, y);
+    private void toggleMenu() {
+        isMenuVisible = !isMenuVisible;
+        sideMenuPanel.setVisible(isMenuVisible);
+        revalidate();
+        repaint();
     }
 
     private void adicionarCards() throws IOException {
         leitor = new LeitorArquivoAluno();
-        // Exemplo de adicionar cards
         for (Aluno a : leitor.ler()) {
             TutorCard card = new TutorCard("Aluno " + a.getNome(), "Quero ajuda na materia: " + a.getMateriaDesejada(), "Enviar mensagem para aluno!");
+            JButton btnMessage = card.getBtnAcao();  // Supondo que TutorCard tem um método getButton()
+            btnMessage.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    MessageDialog dialog = new MessageDialog(JFrame.getFrames()[0]);  // Pega o frame principal
+                    dialog.setVisible(true);
+                }
+            });
             panelCards.add(card);
             panelCards.add(Box.createRigidArea(new Dimension(0, 10))); // Espaço entre cards
         }
         panelCards.revalidate();
+        panelCards.repaint();
     }
 
     /**
