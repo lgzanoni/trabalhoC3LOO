@@ -94,6 +94,10 @@ public class TelaHomeAluno extends javax.swing.JPanel {
         JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         bottomPanel.setBackground(Styles.MENU_COLOR);
         bottomPanel.add(btnSair);
+        sideMenuPanel.add(bottomPanel, BorderLayout.SOUTH);
+        sideMenuPanel.setVisible(false); // O menu começa oculto
+
+        add(sideMenuPanel, BorderLayout.WEST);
 
         // Configuração dos cards
         panelCards = new JPanel();
